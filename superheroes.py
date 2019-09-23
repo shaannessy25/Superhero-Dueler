@@ -9,8 +9,8 @@ class Ability:
         self.attack_strength = attack_strength
 
     def attack (self):
-        strength = random.randint(self.attack_strength, 100)
-        return strength
+        return random.randint(self.attack_strength, 100)
+        
 
 
 class Armor:
@@ -46,8 +46,8 @@ class Hero:
     def add_armor (self, armor):
         self.armors.append(armor)    
 
-    def take_damage (self):
-        pass
+    def take_damage (self, damage):
+        self.current_health -= damage - self.defend()
     def is_alive (self):
         pass
     def fight (self):
@@ -56,7 +56,9 @@ class Hero:
 if __name__ == "__main__":
     # If you run this file from the terminal
     # this block is executed.
-    armor = Ability("Great Debugging", 50)
-    hero = Hero("Grace Hopper", 200, 50)
-    hero.add_armor(armor)
-    print(hero.add_armor())
+   
+    hero = Hero("Grace Hopper", 200)
+    shield = Armor("Shield", 50)
+    hero.add_armor(shield)
+    hero.take_damage(50)
+    print(hero.current_health)
