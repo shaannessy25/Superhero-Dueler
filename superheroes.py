@@ -17,7 +17,7 @@ class Armor:
     def __init__ (self, name, max_block):
         self.name = name
         self.max_block = max_block
-    def block (self, max_block):
+    def block (self):
         block = random.randint(0, self.max_block)
         return block
 
@@ -37,7 +37,7 @@ class Hero:
             damage_total += ability.attack()
         return damage_total    
 
-    def defend (self, damage_amt):
+    def defend (self):
         block_total = 0
         for armor in self.armors:
             block_total += armor.block()
@@ -48,16 +48,20 @@ class Hero:
 
     def take_damage (self, damage):
         self.current_health -= damage - self.defend()
+
     def is_alive (self):
-        pass
+        if self.current_health > 0:
+            return True
+        else:
+            return False
+
     def fight (self):
         pass
 
 if __name__ == "__main__":
     # If you run this file from the terminal
     # this block is executed.
-   
-    hero = Hero("Grace Hopper", 200)
+    hero = Hero("Grace Hopper", 200, 200)
     shield = Armor("Shield", 50)
     hero.add_armor(shield)
     hero.take_damage(50)
