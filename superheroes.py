@@ -31,6 +31,7 @@ class Hero:
 
     def add_ability (self, ability):
         self.abilities.append(ability)
+
     def attack (self):
         damage_total = 0
         for ability in self.abilities:
@@ -66,18 +67,31 @@ class Hero:
         else:
             return print(f"{self.name} won!")
 
+
+def test_hero_fight():
+    hero1 = Hero("Wonder Woman", 200)
+    ability1 = Ability("Super Speed", 30)
+    ability2 = Ability("Super Eyes", 130)
+    hero1.add_ability(ability1)
+    hero1.add_ability(ability2)
+
+    hero2 = Hero("Dumbledore", 200)
+    ability3 = Ability("Wizard Wand", 80)
+    ability4 = Ability("Wizard Beard", 20)
+    hero2.add_ability(ability3)
+    hero2.add_ability(ability4)
+
+    hero1.fight(hero2)
+    if hero1.is_alive():
+        return hero1.name
+    elif hero2.is_alive():
+        return hero2.name
+    else:
+        return 'tie'
+
 if __name__ == "__main__":
     # If you run this file from the terminal
     # this block is executed.
-    hero1 = Hero("Wonder Woman", 200)
-    hero2 = Hero("Dumbledore", 200)
-    ability1 = Ability("Super Speed", 300)
-    ability2 = Ability("Super Eyes", 130)
-    ability3 = Ability("Wizard Wand", 80)
-    ability4 = Ability("Wizard Beard", 20)
-    hero1.add_ability(ability1)
-    hero1.add_ability(ability2)
-    hero2.add_ability(ability3)
-    hero2.add_ability(ability4)
-    hero1.fight(hero2)
-
+    for count in range(2):
+        winner = test_hero_fight()
+        print(winner)
