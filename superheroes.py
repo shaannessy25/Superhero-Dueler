@@ -1,8 +1,6 @@
 import random
 
 
-
-
 class Ability:
     def __init__ (self, name, attack_strength):
         self.name = name
@@ -11,7 +9,9 @@ class Ability:
     def attack (self):
         return random.randint(0, self.attack_strength)
         
-
+class Weapon(Ability):
+    def attack(self):
+        return random.randint(self.attack_strength // 2, self.attack_strength)
 
 class Armor:
     def __init__ (self, name, max_block):
@@ -67,6 +67,24 @@ class Hero:
         else:
             return print(f"{self.name} won!")
 
+class Team:
+    def __init__(self, name):
+        self.name = name
+        self.heroes = []
+
+    def add_hero(self, name):
+        self.heroes.append(name)
+
+    def remove_hero(self, name):
+        for hero in self.heroes:
+            if hero.name == name:
+                self.heroes.remove(name)
+                return self.heroes
+        return 0
+
+    def view_heroes(self):
+        for heroes in self.heroes:
+            print(heroes.name)
 
 def test_hero_fight():
     hero1 = Hero("Wonder Woman", 200)
