@@ -78,11 +78,11 @@ class Team:
     def remove_hero(self, name):
         for hero in self.heroes:
             if hero.name == name:
-                self.heroes.remove(name)
+                self.heroes.remove(hero)
                 return self.heroes
         return 0
 
-    def view_heroes(self):
+    def view_all_heroes(self):
         for heroes in self.heroes:
             print(heroes.name)
 
@@ -110,6 +110,6 @@ def test_hero_fight():
 if __name__ == "__main__":
     # If you run this file from the terminal
     # this block is executed.
-    for count in range(2):
+    for count in range(21):
         winner = test_hero_fight()
         print(winner)
