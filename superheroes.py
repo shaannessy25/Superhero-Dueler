@@ -36,7 +36,10 @@ class Hero:
     def add_weapon(self, weapon):
         self.abilities.append(weapon)
 
-    def attack (self):
+    def add_armor(self, armor):
+        self.armors.append(armor)    
+
+    def attack(self):
         damage_total = 0
         for ability in self.abilities:
             damage_total += ability.attack()
@@ -50,25 +53,22 @@ class Hero:
         self.deaths += num_deaths
         return self.deaths
 
-    def defend (self):
+    def defend(self):
         block_total = 0
         for armor in self.armors:
             block_total += armor.block()
         return block_total
 
-    def add_armor (self, armor):
-        self.armors.append(armor)    
-
-    def take_damage (self, damage):
+    def take_damage(self, damage):
         self.current_health -= damage - self.defend()
 
-    def is_alive (self):
+    def is_alive(self):
         if self.current_health > 0:
             return True
         else:
             return False
 
-    def fight (self, opponent):
+    def fight(self, opponent):
         while self.is_alive() and opponent.is_alive():
             self.take_damage(opponent.attack())
             opponent.take_damage(self.attack())
@@ -115,6 +115,37 @@ class Team:
     def stats(self):
         for hero in self.heroes:
             print(f" Hero: {hero.name} Kills: {hero.kills} Deaths: {hero.deaths} KD Ratio: {hero.kills/hero.deaths}")
+
+class Arena:
+    def __init__(self):
+        self.team_one = Team('team_one')
+        self.team_two = Team ('team_two')
+    
+    def create_ability(self):
+        ability = input("Enter an ability: ")  
+        attack_power = int(input("Enter number for attack power: "))
+        return Ability(ability, attack_power)
+    
+    def create_weapon(self):
+        weapon = input("Enter a weapon: ")
+        attack_power = input("Enter number for attack power: ")
+        return Weapon(weapon, attack_power)
+
+    def create_armor(self):
+        armor = input('Enter an armor: ')
+        armor_power = input('Enter a number for armor power')
+        return Armor(armor, armor_power)
+    
+    def create_hero(self):
+        hero_name = input('Enter your hero name: ')
+        hero = Hero(hero_name)
+        ability = self.create_ability()
+        weapon = self.create_weapon()
+        armor = self.create_armor()
+        hero.add_ability(ability)
+        hero.add_weapon(weapon)
+        hero.add_armor(armor)
+        return Hero(hero_name)
 
 def test_hero_fight():
     hero1 = Hero("Wonder Woman", 200)
