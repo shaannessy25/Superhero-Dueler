@@ -47,8 +47,8 @@ class Hero:
         return self.kills
     
     def add_deaths(self, num_deaths):
-        num_deaths += self.deaths
-        return num_deaths
+        self.deaths += num_deaths
+        return self.deaths
 
     def defend (self):
         block_total = 0
@@ -69,20 +69,18 @@ class Hero:
             return False
 
     def fight (self, opponent):
-        if len(self.abilities) == 0 and len(opponent.abilities):
-            return print("Draw!")
         while self.is_alive() and opponent.is_alive():
             self.take_damage(opponent.attack())
             opponent.take_damage(self.attack())
 
-        if self.is_alive() == False:
-            self.add_deaths(1)
-            opponent.add_kill(1)
-            return print(f"{opponent.name} won!")
-        else:
-            self.add_kill(1)
-            opponent.add_deaths(1)
-            return print(f"{self.name} won!")
+            if self.is_alive() == False:
+                self.add_deaths(1)
+                opponent.add_kill(1)
+                return print(f"{opponent.name} won!")
+            else:
+                self.add_kill(1)
+                opponent.add_deaths(1)
+                return print(f"{self.name} won!")
 
 class Team:
     def __init__(self, name):
