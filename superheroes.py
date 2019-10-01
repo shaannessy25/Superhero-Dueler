@@ -149,12 +149,14 @@ class Arena:
         name = input("Enter a Hero name: ")
         new_Hero = Hero(name, starting_health=100)
         want_ability = input("Do you want an ability? Y or N:  ")
-        want_weapon = input("Do you want a weapon? Y or N:  ")
-        want_armor = input("Do you want armor? Y or N:  ")
         if want_ability == "Y" or want_ability == 'y':
             new_Hero.add_ability(self.create_ability())
+
+        want_weapon = input("Do you want a weapon? Y or N:  ")
         if want_weapon == "Y" or want_weapon == 'y':
             new_Hero.add_weapon(self.create_weapon())
+            
+        want_armor = input("Do you want armor? Y or N:  ")
         if want_armor == "Y" or want_armor == 'y':
             new_Hero.add_armor(self.create_armor())
         return new_Hero
